@@ -1,0 +1,68 @@
+import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
+
+import { BasketComponentsPage, BasketDeleteDialog, BasketUpdatePage } from './basket.page-object';
+
+const expect = chai.expect;
+
+describe('Basket e2e test', () => {
+  let navBarPage: NavBarPage;
+  let signInPage: SignInPage;
+  let basketComponentsPage: BasketComponentsPage;
+  let basketUpdatePage: BasketUpdatePage;
+  let basketDeleteDialog: BasketDeleteDialog;
+
+  before(async () => {
+    await browser.get('/');
+    navBarPage = new NavBarPage();
+    signInPage = await navBarPage.getSignInPage();
+    await signInPage.autoSignInUsing('admin', 'admin');
+    await browser.wait(ec.visibilityOf(navBarPage.entityMenu), 5000);
+  });
+
+  it('should load Baskets', async () => {
+    await navBarPage.goToEntity('basket');
+    basketComponentsPage = new BasketComponentsPage();
+    await browser.wait(ec.visibilityOf(basketComponentsPage.title), 5000);
+    expect(await basketComponentsPage.getTitle()).to.eq('Baskets');
+  });
+
+  it('should load create Basket page', async () => {
+    await basketComponentsPage.clickOnCreateButton();
+    basketUpdatePage = new BasketUpdatePage();
+    expect(await basketUpdatePage.getPageTitle()).to.eq('Create or edit a Basket');
+    await basketUpdatePage.cancel();
+  });
+
+  it('should create and save Baskets', async () => {
+    const nbButtonsBeforeCreate = await basketComponentsPage.countDeleteButtons();
+
+    await basketComponentsPage.clickOnCreateButton();
+    await promise.all([
+      basketUpdatePage.setTotalPriceInput('5'),
+      basketUpdatePage.setCreationDateInput('2000-12-31')
+      // basketUpdatePage.discountCodesSelectLastOption(),
+    ]);
+    expect(await basketUpdatePage.getTotalPriceInput()).to.eq('5', 'Expected totalPrice value to be equals to 5');
+    expect(await basketUpdatePage.getCreationDateInput()).to.eq('2000-12-31', 'Expected creationDate value to be equals to 2000-12-31');
+    await basketUpdatePage.save();
+    expect(await basketUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+
+    expect(await basketComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+  });
+
+  it('should delete last Basket', async () => {
+    const nbButtonsBeforeDelete = await basketComponentsPage.countDeleteButtons();
+    await basketComponentsPage.clickOnLastDeleteButton();
+
+    basketDeleteDialog = new BasketDeleteDialog();
+    expect(await basketDeleteDialog.getDialogTitle()).to.eq('Are you sure you want to delete this Basket?');
+    await basketDeleteDialog.clickOnConfirmButton();
+
+    expect(await basketComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+  });
+
+  after(async () => {
+    await navBarPage.autoSignOut();
+  });
+});
