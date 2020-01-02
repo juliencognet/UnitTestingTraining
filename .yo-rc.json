@@ -1,0 +1,39 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.cgi.fictestautomatises.productbasket"
+    },
+    "jhipsterVersion": "6.6.0",
+    "applicationType": "monolith",
+    "baseName": "FIC_Tests_Automatises",
+    "packageName": "com.cgi.fictestautomatises.productbasket",
+    "packageFolder": "com/cgi/fictestautomatises/productbasket",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "YWE1NmY5MGI3ODU5ZjRlYWJkMzBhOTg3ZTk2NDc5MjY1ZTc5NGM2ZTBjYjQ3YWVlOWZlNmYxNjFhZjUwOTg5YWY0ZGM5MjU5YmU3YmYwYTFiNGVmMWEyYjU3ZWIwMGVkMjE1YmNmYzc3MDkzYmNjYTMyMzM2NzZlZGMzYjY1YWE=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1577981726358,
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
