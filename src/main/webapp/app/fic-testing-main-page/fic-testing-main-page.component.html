@@ -1,0 +1,14 @@
+<div id="basketIcon">
+    <jhi-basket-icon *ngIf="currentBasket!=null&&basketFound" [basket]="currentBasket" [customerId]="customerId"></jhi-basket-icon>
+</div>
+<div id="switchUser">
+    <button id="btnSwitchUser" class="btn btn-dark" routerLink="/" title="Switch user">
+    <fa-icon icon="id-badge"></fa-icon>
+    </button>
+</div>
+
+<div id="productList">
+  <jhi-product-list *ngIf="customerId>0&&basketFound" (onSelectProduct)="onSelectProduct($event)"></jhi-product-list>
+</div>
+
+

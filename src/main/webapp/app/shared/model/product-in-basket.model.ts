@@ -1,7 +1,10 @@
+import { IProduct } from './product.model';
+
 export interface IProductInBasket {
   id?: number;
   quantity?: number;
   productId?: number;
+  product?: IProduct;
   basketId?: number;
 }
 

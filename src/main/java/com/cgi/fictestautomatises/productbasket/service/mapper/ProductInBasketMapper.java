@@ -13,6 +13,7 @@ public interface ProductInBasketMapper extends EntityMapper<ProductInBasketDTO, 
 
     @Mapping(source = "product.id", target = "productId")
     @Mapping(source = "basket.id", target = "basketId")
+    @Mapping(source = "product", target = "product")
     ProductInBasketDTO toDto(ProductInBasket productInBasket);
 
     @Mapping(source = "productId", target = "product")

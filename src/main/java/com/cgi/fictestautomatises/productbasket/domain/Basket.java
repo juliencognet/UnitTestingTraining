@@ -1,4 +1,5 @@
 package com.cgi.fictestautomatises.productbasket.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -38,6 +39,10 @@ public class Basket implements Serializable {
                joinColumns = @JoinColumn(name = "basket_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "discount_codes_id", referencedColumnName = "id"))
     private Set<DiscountCode> discountCodes = new HashSet<>();
+
+    @OneToOne(mappedBy = "basket")
+    @JsonIgnore
+    private Customer customer;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -122,6 +127,19 @@ public class Basket implements Serializable {
 
     public void setDiscountCodes(Set<DiscountCode> discountCodes) {
         this.discountCodes = discountCodes;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Basket customer(Customer customer) {
+        this.customer = customer;
+        return this;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

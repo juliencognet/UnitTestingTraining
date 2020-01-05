@@ -11,10 +11,9 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {DiscountCodeMapper.class})
 public interface BasketMapper extends EntityMapper<BasketDTO, Basket> {
 
-
-    @Mapping(target = "products", ignore = true)
     @Mapping(target = "removeProducts", ignore = true)
     @Mapping(target = "removeDiscountCodes", ignore = true)
+    @Mapping(target = "customer", ignore = true)
     Basket toEntity(BasketDTO basketDTO);
 
     default Basket fromId(Long id) {

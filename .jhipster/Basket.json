@@ -30,6 +30,13 @@
             "relationshipName": "discountCodes",
             "otherEntityField": "id",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "customer",
+            "otherEntityRelationshipName": "basket",
+            "relationshipName": "customer",
+            "ownerSide": false
         }
     ],
     "changelogDate": "20200102164410",

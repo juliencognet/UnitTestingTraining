@@ -18,6 +18,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing {@link com.cgi.fictestautomatises.productbasket.domain.Basket}.
@@ -83,10 +84,15 @@ public class BasketResource {
      * {@code GET  /baskets} : get all the baskets.
      *
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of baskets in body.
      */
     @GetMapping("/baskets")
-    public List<BasketDTO> getAllBaskets(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<BasketDTO> getAllBaskets(@RequestParam(required = false) String filter,@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+        if ("customer-is-null".equals(filter)) {
+            log.debug("REST request to get all Baskets where customer is null");
+            return basketService.findAllWhereCustomerIsNull();
+        }
         log.debug("REST request to get all Baskets");
         return basketService.findAll();
     }

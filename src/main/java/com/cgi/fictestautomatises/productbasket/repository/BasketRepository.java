@@ -23,7 +23,10 @@ public interface BasketRepository extends JpaRepository<Basket, Long> {
     @Query("select distinct basket from Basket basket left join fetch basket.discountCodes")
     List<Basket> findAllWithEagerRelationships();
 
-    @Query("select basket from Basket basket left join fetch basket.discountCodes where basket.id =:id")
+    @Query("select basket from Basket basket " +
+        "left join fetch basket.discountCodes " +
+        "left join fetch basket.products " +
+        "where basket.id =:id")
     Optional<Basket> findOneWithEagerRelationships(@Param("id") Long id);
 
 }

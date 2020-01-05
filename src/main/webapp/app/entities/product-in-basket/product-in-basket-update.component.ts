@@ -46,28 +46,13 @@ export class ProductInBasketUpdateComponent implements OnInit {
       this.updateForm(productInBasket);
 
       this.productService
-        .query({ filter: 'productinbasket-is-null' })
+        .query()
         .pipe(
           map((res: HttpResponse<IProduct[]>) => {
             return res.body ? res.body : [];
           })
         )
-        .subscribe((resBody: IProduct[]) => {
-          if (!productInBasket.productId) {
-            this.products = resBody;
-          } else {
-            this.productService
-              .find(productInBasket.productId)
-              .pipe(
-                map((subRes: HttpResponse<IProduct>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: IProduct[]) => {
-                this.products = concatRes;
-              });
-          }
-        });
+        .subscribe((resBody: IProduct[]) => (this.products = resBody));
 
       this.basketService
         .query()

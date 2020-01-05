@@ -19,7 +19,7 @@
                 <constraints nullable="false" />
             </column>
             <column name="product_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_product_in_basket_product_id" />
+                <constraints nullable="true" />
             </column>
             <column name="basket_id" type="bigint">
                 <constraints nullable="true" />

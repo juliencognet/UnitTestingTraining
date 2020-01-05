@@ -13,8 +13,9 @@ public class ProductInBasketDTO implements Serializable {
     @NotNull
     private Integer quantity;
 
-
     private Long productId;
+
+    private ProductDTO product;
 
     private Long basketId;
 
@@ -48,6 +49,14 @@ public class ProductInBasketDTO implements Serializable {
 
     public void setBasketId(Long basketId) {
         this.basketId = basketId;
+    }
+
+    public ProductDTO getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductDTO product) {
+        this.product = product;
     }
 
     @Override

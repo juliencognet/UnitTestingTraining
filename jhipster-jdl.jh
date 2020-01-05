@@ -30,13 +30,16 @@ entity Customer {
 
 
 relationship OneToOne {
-	Customer{basket} to Basket
-    ProductInBasket{product} to Product
+	Customer{basket} to Basket{customer}
+}
+
+relationship ManyToOne {
+	ProductInBasket{product} to Product
 }
 
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
-	Basket {products} to ProductInBasket   
+	Basket {products} to ProductInBasket
 }
 
 relationship ManyToMany{

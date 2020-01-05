@@ -8,6 +8,7 @@ export interface IBasket {
   creationDate?: Moment;
   products?: IProductInBasket[];
   discountCodes?: IDiscountCode[];
+  customerId?: number;
 }
 
 export class Basket implements IBasket {
@@ -16,6 +17,7 @@ export class Basket implements IBasket {
     public totalPrice?: number,
     public creationDate?: Moment,
     public products?: IProductInBasket[],
-    public discountCodes?: IDiscountCode[]
+    public discountCodes?: IDiscountCode[],
+    public customerId?: number
   ) {}
 }

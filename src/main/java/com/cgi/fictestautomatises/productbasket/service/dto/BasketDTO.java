@@ -1,10 +1,10 @@
 package com.cgi.fictestautomatises.productbasket.service.dto;
+import com.cgi.fictestautomatises.productbasket.domain.ProductInBasket;
+
 import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * A DTO for the {@link com.cgi.fictestautomatises.productbasket.domain.Basket} entity.
@@ -21,6 +21,8 @@ public class BasketDTO implements Serializable {
 
 
     private Set<DiscountCodeDTO> discountCodes = new HashSet<>();
+
+    private Set<ProductInBasketDTO> products = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -52,6 +54,14 @@ public class BasketDTO implements Serializable {
 
     public void setDiscountCodes(Set<DiscountCodeDTO> discountCodes) {
         this.discountCodes = discountCodes;
+    }
+
+    public Set<ProductInBasketDTO> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<ProductInBasketDTO> products) {
+        this.products = products;
     }
 
     @Override

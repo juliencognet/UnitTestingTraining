@@ -1,5 +1,30 @@
 # FIC_Tests_Automatises
 
+## Exercices
+
+### Exercice 1 - Tests via JUnit de la méthode computeBasketPrice de la classe BasketService
+
+L'objectif est de tester la méthode computeBasketPrice.
+
+1. Quels sont tous les cas de tests de cette méthode ?
+2. Implémenter les différents cas de test avec JUnit
+3. Les tests implémentés sont-ils RIP ?
+
+### Exercice 2 - Tests JUnit indépendants via utilisation de H2
+
+### Exercice 3 - Tests JUnit indépendants via utilisation de Mockito
+
+### Exercice 4 - Nouvelle fonctionnalité en mode Test Driven Development
+
+Essayez de supprimer un produit du panier. Quel est le comportement attendu sur le prix total du panier ?
+Se mettre en mode Test Driven Development pour implémenter la fonctionnalité
+
+### Exercice 5 - Essayons le Behavior Driven Development pour ajouter l'implémentation des codes de réduction
+
+### Exercice 6 - Test d'IHM avec RobotFramework et Selenium
+
+A définir
+
 This application was generated using JHipster 6.6.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.6.0](https://www.jhipster.tech/documentation-archive/v6.6.0).
 
 ## Development
@@ -27,24 +52,6 @@ specifying a newer version in [package.json](package.json). You can also run `np
 Add the `help` flag on any command to see how you can use it. For example, `npm help update`.
 
 The `npm run` command will list all of the scripts available to run for this project.
-
-### PWA Support
-
-JHipster ships with PWA (Progressive Web App) support, and it's turned off by default. One of the main components of a PWA is a service worker.
-
-The service worker initialization code is commented out by default. To enable it, uncomment the following code in `src/main/webapp/index.html`:
-
-```html
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js').then(function() {
-      console.log('Service Worker Registered');
-    });
-  }
-</script>
-```
-
-Note: [Workbox](https://developers.google.com/web/tools/workbox/) powers JHipster's service worker. It dynamically generates the `service-worker.js` file.
 
 ### Managing dependencies
 

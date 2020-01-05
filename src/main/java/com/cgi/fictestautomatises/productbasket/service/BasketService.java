@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing {@link Basket}.
@@ -31,15 +32,16 @@ public class BasketService {
     private final BasketRepository basketRepository;
 
     private final ProductInBasketRepository productInBasketRepository;
+
     private final ProductService productService;
 
     private final BasketMapper basketMapper;
 
-    public BasketService(BasketRepository basketRepository, BasketMapper basketMapper, ProductInBasketRepository productInBasketRepository, ProductService productService) {
+    public BasketService(BasketRepository basketRepository, ProductInBasketRepository productInBasketRepository, ProductService productService, BasketMapper basketMapper) {
         this.basketRepository = basketRepository;
-        this.basketMapper = basketMapper;
         this.productInBasketRepository = productInBasketRepository;
         this.productService = productService;
+        this.basketMapper = basketMapper;
     }
 
     /**
@@ -80,6 +82,21 @@ public class BasketService {
     }
     
 
+
+    /**
+    *  Get all the baskets where Customer is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true) 
+    public List<BasketDTO> findAllWhereCustomerIsNull() {
+        log.debug("Request to get all baskets where Customer is null");
+        return StreamSupport
+            .stream(basketRepository.findAll().spliterator(), false)
+            .filter(basket -> basket.getCustomer() == null)
+            .map(basketMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
     /**
      * Get one basket by id.
      *
@@ -104,6 +121,7 @@ public class BasketService {
     }
 
 
+
     /**
      * Compute price of current basket
      */
@@ -123,7 +141,7 @@ public class BasketService {
                 this.productService.findOne(p.getProduct().getId()).get().getUnitPrice()
                     // must call product service to get product data because when product is added to basket as
                     // ProductInBasket, object is nearly empty (excepted ID)
-                * p.getQuantity()
+                    * p.getQuantity()
             )
             .reduce((price1, price2) -> price1+price2) // total is sum of all lines
             .orElse(0F); // if no product in basket, basket price is 0
@@ -134,5 +152,6 @@ public class BasketService {
         // Save current basket
         basketRepository.save(currentBasket);
     }
+
 
 }

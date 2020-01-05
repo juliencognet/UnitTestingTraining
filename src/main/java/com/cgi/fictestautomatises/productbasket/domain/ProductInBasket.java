@@ -24,8 +24,8 @@ public class ProductInBasket implements Serializable {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne(fetch = FetchType.EAGER)
+    //@JsonIgnoreProperties("productInBaskets")
     private Product product;
 
     @ManyToOne

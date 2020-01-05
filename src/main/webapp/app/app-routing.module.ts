@@ -1,3 +1,4 @@
+import { ProductBasketComponent } from './product-basket/product-basket.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { errorRoute } from './layouts/error/error.route';
@@ -5,6 +6,7 @@ import { navbarRoute } from './layouts/navbar/navbar.route';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
+import { FicTestingMainPageComponent } from './fic-testing-main-page/fic-testing-main-page.component';
 
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
 
@@ -12,6 +14,8 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
   imports: [
     RouterModule.forRoot(
       [
+        { path: 'productList/:customerId', component: FicTestingMainPageComponent },
+        { path: 'productBasket/:customerId/:basketId', component: ProductBasketComponent },
         {
           path: 'admin',
           data: {
