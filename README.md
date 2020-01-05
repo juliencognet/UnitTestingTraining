@@ -10,6 +10,12 @@ L'objectif est de tester la méthode computeBasketPrice.
 2. Implémenter les différents cas de test avec JUnit
 3. Les tests implémentés sont-ils RIP ?
 
+<details>
+  <summary>Click to see solution</summary>
+  
+  Et bien voila ce qu'il faut faire
+</details>
+
 ### Exercice 2 - Tests JUnit indépendants via utilisation de H2
 
 ### Exercice 3 - Tests JUnit indépendants via utilisation de Mockito
