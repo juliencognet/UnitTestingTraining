@@ -1,10 +1,12 @@
 package com.cgi.fictestautomatises.productbasket.service;
 
 import com.cgi.fictestautomatises.productbasket.domain.Basket;
+import com.cgi.fictestautomatises.productbasket.domain.DiscountCode;
 import com.cgi.fictestautomatises.productbasket.domain.ProductInBasket;
 import com.cgi.fictestautomatises.productbasket.repository.BasketRepository;
 import com.cgi.fictestautomatises.productbasket.repository.ProductInBasketRepository;
 import com.cgi.fictestautomatises.productbasket.service.dto.BasketDTO;
+import com.cgi.fictestautomatises.productbasket.service.dto.DiscountCodeDTO;
 import com.cgi.fictestautomatises.productbasket.service.mapper.BasketMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,11 +39,14 @@ public class BasketService {
 
     private final BasketMapper basketMapper;
 
-    public BasketService(BasketRepository basketRepository, ProductInBasketRepository productInBasketRepository, ProductService productService, BasketMapper basketMapper) {
+    private final DiscountCodeService discountCodeService;
+
+    public BasketService(BasketRepository basketRepository, ProductInBasketRepository productInBasketRepository, ProductService productService, BasketMapper basketMapper, DiscountCodeService discountCodeService) {
         this.basketRepository = basketRepository;
         this.productInBasketRepository = productInBasketRepository;
         this.productService = productService;
         this.basketMapper = basketMapper;
+        this.discountCodeService = discountCodeService;
     }
 
     /**
@@ -153,5 +158,25 @@ public class BasketService {
         basketRepository.save(currentBasket);
     }
 
+
+    public BasketDTO addDiscountCode(Long id, String discountCodeName){
+        //Try to retrieve basket
+        Basket basket = basketRepository.getOne(id);
+
+        // Try to retrieve discount Code
+        DiscountCode discountCode = discountCodeService.findOneByCode(discountCodeName).orElseThrow(()->new RuntimeException("Discount code "+discountCodeName+" does not exist"));
+
+        // If found, add it
+        basket.addDiscountCodes(discountCode);
+
+        // Then save it
+        basketRepository.save(basket);
+
+        // Recompute basket price
+        computeBasketPrice(id);
+
+        // And return it
+        return basketMapper.toDto(basket);
+    }
 
 }

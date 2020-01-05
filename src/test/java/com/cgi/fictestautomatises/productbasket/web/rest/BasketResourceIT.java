@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = FicTestsAutomatisesApp.class)
 public class BasketResourceIT {
 
-    private static final Float DEFAULT_TOTAL_PRICE = 1F;
+    private static final Float DEFAULT_TOTAL_PRICE = 0F;
     private static final Float UPDATED_TOTAL_PRICE = 2F;
 
     private static final LocalDate DEFAULT_CREATION_DATE = LocalDate.ofEpochDay(0L);
@@ -301,7 +301,7 @@ public class BasketResourceIT {
         List<Basket> basketList = basketRepository.findAll();
         assertThat(basketList).hasSize(databaseSizeBeforeUpdate);
         Basket testBasket = basketList.get(basketList.size() - 1);
-        assertThat(testBasket.getTotalPrice()).isEqualTo(UPDATED_TOTAL_PRICE);
+        assertThat(testBasket.getTotalPrice()).isEqualTo(0);
         assertThat(testBasket.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
     }
 

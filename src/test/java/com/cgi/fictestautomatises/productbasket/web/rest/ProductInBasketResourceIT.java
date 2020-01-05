@@ -1,7 +1,9 @@
 package com.cgi.fictestautomatises.productbasket.web.rest;
 
 import com.cgi.fictestautomatises.productbasket.FicTestsAutomatisesApp;
+import com.cgi.fictestautomatises.productbasket.domain.Basket;
 import com.cgi.fictestautomatises.productbasket.domain.ProductInBasket;
+import com.cgi.fictestautomatises.productbasket.repository.BasketRepository;
 import com.cgi.fictestautomatises.productbasket.repository.ProductInBasketRepository;
 import com.cgi.fictestautomatises.productbasket.service.ProductInBasketService;
 import com.cgi.fictestautomatises.productbasket.service.dto.ProductInBasketDTO;
@@ -41,6 +43,9 @@ public class ProductInBasketResourceIT {
 
     @Autowired
     private ProductInBasketRepository productInBasketRepository;
+
+    @Autowired
+    static private BasketRepository basketRepository;
 
     @Autowired
     private ProductInBasketMapper productInBasketMapper;

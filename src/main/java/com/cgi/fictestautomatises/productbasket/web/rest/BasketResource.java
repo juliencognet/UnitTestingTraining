@@ -1,6 +1,7 @@
 package com.cgi.fictestautomatises.productbasket.web.rest;
 
 import com.cgi.fictestautomatises.productbasket.service.BasketService;
+import com.cgi.fictestautomatises.productbasket.service.DiscountCodeService;
 import com.cgi.fictestautomatises.productbasket.web.rest.errors.BadRequestAlertException;
 import com.cgi.fictestautomatises.productbasket.service.dto.BasketDTO;
 
@@ -78,6 +79,15 @@ public class BasketResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, basketDTO.getId().toString()))
             .body(result);
+    }
+
+    @PutMapping("/baskets/{id}/discount/{discountCode}")
+    public ResponseEntity<BasketDTO> addDiscountCode(@PathVariable Long id, @PathVariable String discountCode) throws URISyntaxException {
+        log.debug("REST request to update Basket : {} to add discount code {}", id,discountCode);
+        BasketDTO basketDTO = basketService.addDiscountCode(id, discountCode);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, basketDTO.getId().toString()))
+            .body(basketDTO);
     }
 
     /**

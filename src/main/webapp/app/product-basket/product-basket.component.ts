@@ -1,3 +1,4 @@
+import { IProductInBasket } from './../shared/model/product-in-basket.model';
 import { ProductInBasketService } from './../entities/product-in-basket/product-in-basket.service';
 import { Component, OnInit } from '@angular/core';
 import { IBasket } from 'app/shared/model/basket.model';
@@ -16,6 +17,7 @@ export class ProductBasketComponent implements OnInit {
   customerId = 0;
   loading = false;
   alerts: JhiAlert[] = [];
+  discountCode = '';
 
   constructor(
     private basketService: BasketService,
@@ -48,6 +50,47 @@ export class ProductBasketComponent implements OnInit {
       this.productInBasketService
         .delete(productInBasket.id)
         .subscribe(() => this.loadBasket(this.currentBasket.id ? this.currentBasket.id : 0));
+    }
+  }
+
+  addDiscountCode(): void {
+    this.loading = true;
+    this.basketService.addDiscountCode(this.currentBasket.id ? this.currentBasket.id : 0, this.discountCode).subscribe(
+      res => {
+        this.currentBasket = res.body ? res.body : {};
+        this.loading = false;
+        this.discountCode = '';
+      },
+      err => {
+        this.alertService.error('Discount code not existing', null);
+        console.log(err);
+        this.loading = false;
+      }
+    );
+  }
+
+  updateLineAndReload(line: IProductInBasket): void {
+    console.log(line);
+    const currentBasketId = this.currentBasket.id ? this.currentBasket.id : 0;
+    line.basketId = currentBasketId;
+    if (line.product !== undefined) {
+      line.productId = line.product.id;
+    }
+    this.loading = true;
+    this.productInBasketService.update(line).subscribe(res => {
+      this.loadBasket(currentBasketId);
+    });
+  }
+  removeQuantity(line: IProductInBasket): void {
+    if (line.quantity !== undefined && line.quantity > 1) {
+      line.quantity = line.quantity - 1;
+      this.updateLineAndReload(line);
+    }
+  }
+  addQuantity(line: IProductInBasket): void {
+    if (line.quantity !== undefined) {
+      line.quantity = line.quantity + 1;
+      this.updateLineAndReload(line);
     }
   }
 

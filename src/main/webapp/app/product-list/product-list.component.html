@@ -15,7 +15,7 @@
         <th>Categories</th>
         <th>Unit price</th>
         <th>EAN Code</th>
-        <th>Add to basket</th>
+        <th></th>
     </tr>
 
     <tr *ngFor="let product  of products">
@@ -25,6 +25,8 @@
         <td>{{product.categories}}</td>
         <td>{{product.unitPrice}}$</td>
         <td>{{product.ean13BarCode}}</td>
-        <td ><button class="btn btn-secondary btn-sm" [id]="'btnAddProduct_'+product.id" (click)="selectProduct(product)">Buy</button></td>
+        <td ><button title="Add to basket" class="btn btn-primary btn-sm" [id]="'btnAddProduct_'+product.id" (click)="selectProduct(product)">
+                <fa-icon icon="cart-plus"></fa-icon>
+        </button></td>
     </tr>
 </table>

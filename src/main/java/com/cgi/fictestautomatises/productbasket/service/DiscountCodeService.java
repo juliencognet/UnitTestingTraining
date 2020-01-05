@@ -74,6 +74,18 @@ public class DiscountCodeService {
     }
 
     /**
+     * Get one discountCode by code.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Transactional(readOnly = true)
+    public Optional<DiscountCode> findOneByCode(String code) {
+        log.debug("Request to get DiscountCode : {} by code", code);
+        return discountCodeRepository.findOneByCode(code);
+    }
+
+    /**
      * Delete the discountCode by id.
      *
      * @param id the id of the entity.

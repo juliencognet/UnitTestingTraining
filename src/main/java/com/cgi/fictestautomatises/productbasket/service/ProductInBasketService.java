@@ -47,7 +47,9 @@ public class ProductInBasketService {
         productInBasket = productInBasketRepository.save(productInBasket);
 
         // Recompute basket price
-        this.basketService.computeBasketPrice(productInBasket.getBasket().getId());
+        if (productInBasketDTO.getBasketId()!=null) {
+            this.basketService.computeBasketPrice(productInBasketDTO.getBasketId());
+        }
 
         return productInBasketMapper.toDto(productInBasket);
     }
@@ -92,6 +94,8 @@ public class ProductInBasketService {
         // Then delete the product in basket
         productInBasketRepository.deleteById(id);
         // Compute the price of basket
-        this.basketService.computeBasketPrice(productInBasket.getBasket().getId());
+        if (productInBasket.getBasket()!=null) {
+            this.basketService.computeBasketPrice(productInBasket.getBasket().getId());
+        }
     }
 }

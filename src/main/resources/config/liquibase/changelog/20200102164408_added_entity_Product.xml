@@ -15,7 +15,7 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="product_name" type="varchar(255)">
+            <column name="product_name" type="varchar(2000)">
                 <constraints nullable="false" />
             </column>
             <column name="unit_price" type="${floatType}">
@@ -27,10 +27,10 @@
             <column name="brand" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="categories" type="varchar(255)">
+            <column name="categories" type="varchar(2000)">
                 <constraints nullable="true" />
             </column>
-            <column name="image_url" type="varchar(255)">
+            <column name="image_url" type="varchar(2000)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
