@@ -20,7 +20,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://fictestingproductsbasketdatabase.database.windows.net:5432/postgres
     username: adminfic@fictestingproductsbasketdatabase
-    password: Welcome@FIC2020
+    password: xxx
     hikari:
       poolName: Hikari
       auto-commit: false

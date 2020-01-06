@@ -40,7 +40,7 @@ spring:
     url: jdbc:postgresql://fictestingproductsbasketdatabase.database.windows.net:5432/postgres
     urlInMemory: jdbc:h2:mem:FIC_Tests_Automatises
     username: adminfic@fictestingproductsbasketdatabase
-    password: Welcome@FIC2020
+    password: xxx
     hikari:
       poolName: Hikari
       auto-commit: false
