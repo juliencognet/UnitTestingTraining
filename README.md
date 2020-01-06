@@ -1,4 +1,44 @@
-# FIC_Tests_Automatises
+# Formation aux Tests Automatisés - mise en pratique
+
+## Présentation
+
+### Contexte
+
+### Processus
+
+![Shopping process](doc/shopping_process_and_screens_behaviors.png)
+
+Ecran de sélection d'un client (simulation d'une connexion)
+![Customer login](doc/1.CustomerLoginSimulation.PNG)
+
+Ecran de liste des produits et mise en panier d'achat
+![Products List](doc/2.ProductList.PNG)
+
+Après sélection d'un produit, le panier s'incrémente
+![Ajout au panier](doc/3.ProductAddedToShoppingCart.PNG)
+
+Si on accède au panier
+![Panier de produit](doc/4.ShoppingCart.PNG)
+
+### Entités mises en oeuvre
+
+![Entities](doc/dataModel.PNG)
+
+### Architecture de l'application
+
+![Software architecture](doc/softwareArchitectureDiagram.png)
+
+## Préparation / lancement de l'application
+
+- Se connecter sur la VM attribuée par le formateur
+- Lancer IntellijIDEA.
+- Configurer la source de données en saisissant le mode de passe de l'utilisateur adminfic à la section YML spring.datasource.password dans les fichiers:
+  - src/main/resources/config/application-dev.yml
+  - src/test/resources/config/application.yml
+- Lancer un premier terminal et taper la commande npm start
+- Une fois que l'application front-end Angular est construite, une page web doit s'ouvrir avec l'application
+- Dans l'onglet Terminal, cliquer sur + pour ouvrir un nouveau terminal.
+- Dans ce nouveau terminal, lancer le front-end en tapant la commande mnww
 
 ## Exercices
 
@@ -58,47 +98,6 @@ specifying a newer version in [package.json](package.json). You can also run `np
 Add the `help` flag on any command to see how you can use it. For example, `npm help update`.
 
 The `npm run` command will list all of the scripts available to run for this project.
-
-### Managing dependencies
-
-For example, to add [Leaflet][] library as a runtime dependency of your application, you would run following command:
-
-    npm install --save --save-exact leaflet
-
-To benefit from TypeScript type definitions from [DefinitelyTyped][] repository in development, you would run following command:
-
-    npm install --save-dev --save-exact @types/leaflet
-
-Then you would import the JS and CSS files specified in library's installation instructions so that [Webpack][] knows about them:
-Edit [src/main/webapp/app/vendor.ts](src/main/webapp/app/vendor.ts) file:
-
-```
-import 'leaflet/dist/leaflet.js';
-```
-
-Edit [src/main/webapp/content/scss/vendor.scss](src/main/webapp/content/scss/vendor.scss) file:
-
-```
-@import '~leaflet/dist/leaflet.css';
-```
-
-Note: There are still a few other things remaining to do for Leaflet that we won't detail here.
-
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
-
-### Using Angular CLI
-
-You can also use [Angular CLI][] to generate some custom client code.
-
-For example, the following command:
-
-    ng generate component my-component
-
-will generate few files:
-
-    create src/main/webapp/app/my-component/my-component.component.html
-    create src/main/webapp/app/my-component/my-component.component.ts
-    update src/main/webapp/app/app.module.ts
 
 ## Building for production
 

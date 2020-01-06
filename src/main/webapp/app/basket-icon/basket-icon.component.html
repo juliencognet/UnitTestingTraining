@@ -1,4 +1,5 @@
 <button type="button" id="btnBasket" class="btn btn-primary" [routerLink]="['/productBasket/',customerId,basket.id]">
 <fa-icon icon="shopping-cart"></fa-icon>
-Shopping Cart <span class="badge badge-light" id="badgeNbProductsInBasket">{{numberOfProducts}}</span>
+Shopping Cart : <span class="badge badge-light" id="badgeNbProductsInBasket">{{numberOfProducts}} product(s)</span>
+<span id="totalPriceOfBasket" class="badge">{{basket?.totalPrice}}$</span>
 </button>
