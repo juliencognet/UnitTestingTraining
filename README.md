@@ -25,7 +25,7 @@ Cet écran est une liste de produits électroniques qu'il est possible d'ajouter
 
 ![Products List](doc/2.ProductList.PNG)
 
-Une fois un produit ajouter au panier, le bouton bleu "Shopping cart" est mis à jour avec le nombre de produits sélectionnés et le coût total du panier.
+Une fois un produit ajouté au panier, le bouton bleu "Shopping cart" est mis à jour avec le nombre de produits sélectionnés et le coût total du panier.
 
 ![Ajout au panier](doc/3.ProductAddedToShoppingCart.png)
 
@@ -40,6 +40,17 @@ Dans le panier de produit, il est possible :
 - de procéder au paiement (non implémenté) avec le bouton "Proceed to payment"
 
 ![Panier de produit](doc/4.ShoppingCart.PNG)
+Dans le panier de produit, il est possible :
+
+- de supprimer des lignes du panier avec le bouton Remove de chaque ligne
+- de mettre à jour la quantité avec les boutons + et -
+- d'ajouter des codes de réduction grâce au champ texte "Discount codes"
+- de retourner au magasin avec le bouton "Back to store"
+- de procéder au paiement (non implémenté) avec le bouton "Proceed to payment"
+
+### 1.3. Entités mises en oeuvre
+
+Ce projet met en oeuvre 5 entités métier:
 
 ### 1.3. Entités mises en oeuvre
 
