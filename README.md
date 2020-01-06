@@ -1,48 +1,124 @@
 # Formation aux Tests Automatisés - mise en pratique
 
-## Présentation
+## 1. Présentation
 
-### Contexte
+### 1.1. Contexte
 
-### Processus
+L'application qui va être utilisée pour se former à la réalisation de tests automatisés est une implémentation très simplifiée d'un site web marchand, une marketplace électronique.
+Vous allez vous focaliser sur la fonctionnalité d'ajout / retrait de produits dans un panier d'achat avec calcul du prix total du panier.
+
+### 1.2. Processus
+
+Le processus métier et technique de navigation dans l'application est décrit ci-dessous. Les 3 briques vertes correspondent aux 3 écrans de l'application. La brique orange est celle sur laquelle nous allons nous focaliser dans un premier temps (calcul du prix du panier).
 
 ![Shopping process](doc/shopping_process_and_screens_behaviors.png)
 
-Ecran de sélection d'un client (simulation d'une connexion)
+#### 1.2.1. Ecran de sélection d'un client (simulation d'une connexion)
+
+Cet écran permet de sélectionner un client et de simuler une connexion sur l'application.
+
 ![Customer login](doc/1.CustomerLoginSimulation.PNG)
 
-Ecran de liste des produits et mise en panier d'achat
+#### 1.2.2. Ecran de liste des produits
+
+Cet écran est une liste de produits électroniques qu'il est possible d'ajouter au panier d'achat. Sur chaque ligne un bouton + permet d'ajouter le produit au panier d'achat. En haut de page, le bouton bleu "Shopping Cart" permet d'accéder au panier d'achat, tandis que le bouton noir "Switch user" permet de sélectionner un autre client.
+
 ![Products List](doc/2.ProductList.PNG)
 
-Après sélection d'un produit, le panier s'incrémente
-![Ajout au panier](doc/3.ProductAddedToShoppingCart.PNG)
+Une fois un produit ajouter au panier, le bouton bleu "Shopping cart" est mis à jour avec le nombre de produits sélectionnés et le coût total du panier.
 
-Si on accède au panier
+![Ajout au panier](doc/3.ProductAddedToShoppingCart.png)
+
+#### 1.2.3. Panier de produit
+
+Dans le panier de produit, il est possible :
+
+- de supprimer des lignes du panier avec le bouton Remove de chaque ligne
+- de mettre à jour la quantité avec les boutons + et -
+- d'ajouter des codes de réduction grâce au champ texte "Discount codes"
+- de retourner au magasin avec le bouton "Back to store"
+- de procéder au paiement (non implémenté) avec le bouton "Proceed to payment"
+
 ![Panier de produit](doc/4.ShoppingCart.PNG)
 
-### Entités mises en oeuvre
+### 1.3. Entités mises en oeuvre
+
+Ce projet met en oeuvre 5 entités métier:
+
+- l'entité **Product** (produit) qui matérialise un produit achetable
+- l'entité **Discount Code** (code de réduction) avec le champ discount qui est le pourcentage de réduction applicable au panier
+- l'entité **Basket** (panier d'achats) qui matérialise un panier d'achat et contient le champ "totalPrice" qui est calculé à partir des produits ajoutés au panier
+- l'entité **ProductInBasket** (produit dans le panier) qui contient la liste des produits ajoutés au panier et leur quantité
+- l'entité **Customer** (client) qui est la liste des clients de l'application
+
+Les relations entre ces entités sont décrites dans le schéma ci-dessous:
 
 ![Entities](doc/dataModel.PNG)
 
-### Architecture de l'application
+### 1.4. Architecture de l'application
+
+L'application a été construite avec [Jhipster](https://www.jhipster.tech/), un générateur d'application moderne. Elle est constitué de 3 blocs principaux:
+
+- un front-end Angular qui est une application client riche web exécutée sur le poste de l'utilisateur
+- un back-end sous forme d'API REST exécuté grâce à Spring Boot découpé en 3 couches principales (Ressources REST, services et couche d'accès aux données sous forme de Repository Spring Data)
+- une base de données relationnelle PostgreSQL hébergée sur le cloud Azure comme un service managé.
 
 ![Software architecture](doc/softwareArchitectureDiagram.png)
 
-## Préparation / lancement de l'application
+## 2. Préparation
+
+### 2.1. Compilation et lancement de l'application en mode développement
 
 - Se connecter sur la VM attribuée par le formateur
 - Lancer IntellijIDEA.
-- Configurer la source de données en saisissant le mode de passe de l'utilisateur adminfic à la section YML spring.datasource.password dans les fichiers:
-  - src/main/resources/config/application-dev.yml
-  - src/test/resources/config/application.yml
-- Lancer un premier terminal et taper la commande npm start
-- Une fois que l'application front-end Angular est construite, une page web doit s'ouvrir avec l'application
+- Configurer la source de données en saisissant le mode de passe de l'utilisateur adminfic à la section YML `spring.datasource.password` dans les fichiers :
+  - `src/main/resources/config/application-dev.yml`
+  - `src/test/resources/config/application.yml`
+- Lancer un premier terminal et taper la commande `npm start`
+- Une fois que l'application front-end Angular est construite, la page web Market place simulation doit s'ouvrir dans le navigateur (à l'adresse [http://localhost:9000](http://localhost:9000)
 - Dans l'onglet Terminal, cliquer sur + pour ouvrir un nouveau terminal.
-- Dans ce nouveau terminal, lancer le front-end en tapant la commande mnww
+- Dans ce nouveau terminal, lancer le front-end en tapant la commande `mnww`
+- Vous pouvez ensuite vous connecter sur l'application en cliquant sur "Account" en haut à droite, puis sur "Sign in"
+- Saisir "admin" comme login et "admin" comme password
+- Vous arrivez ensuite sur la première page de l'application _Customer login simulation_
+- A chaque modification de code (côte back-end en Java ou côté front-end en Angular), l'application est redéployée et peut être retestée dans le navigateur
 
-## Exercices
+### 2.2. Lancement des tests unitaires
 
-### Exercice 1 - Tests via JUnit de la méthode computeBasketPrice de la classe BasketService
+Dans Intellij, il est possible de lancer l'ensemble des tests unitaires JUnit en procédant de la façon suivante:
+
+- ouvrir `src/test/java`
+- faire un clic droit sur `src/test/java` puis choisir `run` puis `All tests`. Il est aussi possible de lancer un sous-ensemble des tests en sélectionnant un sous-dossier de cette arborescence.
+- une fois le projet compilé, un onglet `Run` apparaît sur le bas de l'écran et permet de lister l'ensemble des tests exécutés et le résultat associé
+- vous devriez être capable de valider que l'ensemble des 117 tests disponibles passent avec succès.
+
+### 2.3. Mesure de la couverture des tests unitaires
+
+La mesure de la couverture des tests unitaires peut être effectuée de la même façon en sélectionnant l'option `Run all tests with coverage`, plutôt que `Run`. Si vous le faites, vous devriez obtenir une couverture d'au moins 85% des classes et 86% des lignes.
+
+- Commencez par naviguer dans les classes du projet `com.cgi.fictestautomatises.productbasket`
+- Les classes les plus importantes du projets sont dans les sous-dossiers `service` et `web` qui contiennent toute l'intelligence du projet. C'est là où un focus particulier doit être mis.
+  > Quelles sont les classes qui mériteraient une meilleure couverture ?
+  >
+  >    <details>
+  >    <summary>Solution</summary>
+  > `web.rest.BasketResource` (79% de couverture de lignes) dont une méthode complète `addDiscountCode` n'est pas testée ET  `service.BasketService` avec 60% de couverture de méthodes
+  >     </details>
+
+## 3. Exercices
+
+### 3.1. Tests exploratoires
+
+En naviguant dans l'application, repérer tous les bugs
+(double ligne si 2 ajouts de produits, pas de prise en compte des codes de réduction)
+
+### 3.2. Bug fix - sécurisation du refactoring via TDD
+
+Correction de l'anomalie des 2 lignes qui s'affichent si ajout du même produit
+
+#### 3.2.1. TDD
+
+#### 3.2.2. Tests via JUnit
 
 L'objectif est de tester la méthode computeBasketPrice.
 
@@ -50,30 +126,29 @@ L'objectif est de tester la méthode computeBasketPrice.
 2. Implémenter les différents cas de test avec JUnit
 3. Les tests implémentés sont-ils RIP ?
 
-<details>
-  <summary>Click to see solution</summary>
-  
-  Et bien voila ce qu'il faut faire
-</details>
+#### 3.2.3. Tests JUnit indépendants via utilisation de doublon injectés
 
-### Exercice 2 - Tests JUnit indépendants via utilisation de H2
+Dire qu'il y a d'autres façons de faire (profils Spring)
 
-### Exercice 3 - Tests JUnit indépendants via utilisation de Mockito
+#### 3.2.4. Tests JUnit indépendants via utilisation de Mockito
 
-### Exercice 4 - Nouvelle fonctionnalité en mode Test Driven Development
+#### 3.2.5. Tests JUnit indépendants via utilisation d'annotation magique de Spring
 
-Essayez de supprimer un produit du panier. Quel est le comportement attendu sur le prix total du panier ?
-Se mettre en mode Test Driven Development pour implémenter la fonctionnalité
+#### 3.2.6. Tests JUnit indépendants via utilisation de H2
 
-### Exercice 5 - Essayons le Behavior Driven Development pour ajouter l'implémentation des codes de réduction
+### 3.3. Behavior Driven Development
 
-### Exercice 6 - Test d'IHM avec RobotFramework et Selenium
+Implémenter la prise en compte des codes de réduction en mode Behavior Driven Development
+
+### 3.4. Tests d'intégration d'IHM avec RobotFramework et Selenium
 
 A définir
 
-This application was generated using JHipster 6.6.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.6.0](https://www.jhipster.tech/documentation-archive/v6.6.0).
+---
 
-## Development
+## Development (Jhipster documentation)
+
+This application was generated using JHipster 6.6.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.6.0](https://www.jhipster.tech/documentation-archive/v6.6.0).
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
 
@@ -185,10 +260,7 @@ Then run:
 
 For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
 
-## Continuous Integration (optional)
-
-To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
-
+**Links**:
 [jhipster homepage and latest documentation]: https://www.jhipster.tech
 [jhipster 6.6.0 archive]: https://www.jhipster.tech/documentation-archive/v6.6.0
 [using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.6.0/development/
