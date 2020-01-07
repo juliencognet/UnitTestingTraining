@@ -171,21 +171,25 @@ Commencez par développer les tests nécessaires
 Exécutez plusieurs fois votre test et observez le fonctionnement.
 
 > Votre test répond-il aux critères du RIP ?
+>
+>    <details>
+>    <summary>Solution</summary>
+>     Non, car ces tests ne sont pas isolés puisqu'ils dépendent de services d'accès aux données (PostgreSQL). 
+>     Il est donc nécessaire de mocker ces services.
+>    </details>
 
 #### 3.2.2. Isolation des tests par du code
 
-> Comment procéder ?
+Comment procéder ?
+
 > Soit implémenter une interface (Repository
-> public ProductInBasketService(ProductInBasketRepository productInBasketRepository, BasketService basketService, ProductInBasketMapper productInBasketMapper) {
-
-    )
-
-> ProductInBasketRepository est une interface qu'on peut implémenter soit-même (mock manuel)
-> BasketService est une classe qu'on peut mocker de 2 manières différentes
+> public ProductInBasketService(ProductInBasketRepository productInBasketRepository, BasketService basketService, ProductInBasketMapper productInBasketMapper)
 >
-> - par magie avec Spring @Mock
-> - avec Mockito
->   Le mapper sert à convertir un ProductInBasketDTO (POJO exposé par l'API REST) vers un ProductInBasket (classe model utilisé par la persistence), ce n'est pas utile de le mocker. Il n'a pas d'influence négative sur les tests. Par contre, il est testé par cette méthode.
+> - ProductInBasketRepository est une interface qu'on peut implémenter soit-même (mock manuel)
+> - BasketService est une classe qu'on peut mocker de 2 manières différentes
+>   - par magie avec Spring @Mock
+>   - avec Mockito
+> - Le mapper sert à convertir un ProductInBasketDTO (POJO exposé par l'API REST) vers un ProductInBasket (classe model utilisé par la persistence), ce n'est pas utile de le mocker. Il n'a pas d'influence négative sur les tests. Par contre, il est testé par cette méthode.
 
 #### 3.2.3. Test de service avec base de données en mémoire
 
@@ -214,7 +218,7 @@ A définir
 
 ---
 
-## Development (Jhipster documentation)
+## Jhipster documentation (development guide)
 
 This application was generated using JHipster 6.6.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.6.0](https://www.jhipster.tech/documentation-archive/v6.6.0).
 
