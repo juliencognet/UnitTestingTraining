@@ -120,36 +120,93 @@ La mesure de la couverture des tests unitaires peut être effectuée de la même
 
 ### 3.1. Tests exploratoires
 
-En naviguant dans l'application, repérer tous les bugs
-(double ligne si 2 ajouts de produits, pas de prise en compte des codes de réduction)
+Naviguez dans l'application, essayez toutes les fonctionnalités et procédez à des tests exploratoires.
 
-### 3.2. Bug fix - sécurisation du refactoring via TDD
+> Quelles anomalies avez-vous détectée (2 ont été identifiées par les formateurs) ?
+>
+>    <details>
+>    <summary>Solution</summary>
+>    En cas d'ajout du même produit dans le panier, un doublon se crée au lieu d'incrémenter la quantité de cette référence.
+>    Le calcul du panier ne prend pas en compte les bons de réduction qui sont ajoutés sur le panier.
+>    </details>
 
-Correction de l'anomalie des 2 lignes qui s'affichent si ajout du même produit
+### 3.2. Correction de l'anomalie de mise en panier d'un produit
 
-#### 3.2.1. TDD
+#### 3.2.1. Tests Unitaires
 
-#### 3.2.2. Tests via JUnit
+Nous proposons de corriger l'anomalie que vous avez dû détecter lors de l'ajout d'un produit dans le panier.
 
-L'objectif est de tester la méthode computeBasketPrice.
+> Comment allez-vous procéder ? Quelle méthodologie voulez-vous adopter ?
+>
+>    <details>
+>    <summary>Solution</summary>
+>    Le Test Driven Development est particulièrement adapté à la prise en compte d'anomalies puisqu'il sécurise le développement existant et s'assure que l'anomalie ne sera pas reproduite à l'avenir (non-régression)
+>    </details>
 
-1. Quels sont tous les cas de tests de cette méthode ?
-2. Implémenter les différents cas de test avec JUnit
-3. Les tests implémentés sont-ils RIP ?
+Nous vous proposons désormais d'analyser le code correspondant à cette anomalie.
 
-#### 3.2.3. Tests JUnit indépendants via utilisation de doublon injectés
+> Quelles sont les méthodes concernées ?
+>
+>    <details>
+>    <summary>Solution</summary>
+>    La méthode web.rest.ProductInBasketResource.createProductInBasket  appelle la méthode service.ProductInBasketService.save qui appelle repository.productInBasketRepository.save
+>    </details>
 
-Dire qu'il y a d'autres façons de faire (profils Spring)
+Après analyse, pensez-vous que l'organisation du code actuelle vous permet-elle d'implémenter ce nouveau contrôle de façon adéquate.
 
-#### 3.2.4. Tests JUnit indépendants via utilisation de Mockito
+> Quelle réorganisation (refactoring) proposez-vous ?
+>
+>    <details>
+>    <summary>Solution</summary>
+>     Implémenter une nouvelle méthode addProductToBasket dans la classe de service (ProductInBasketService). Cette méthode procède au contrôles fonctionnels (dont le contrôle de doublon) et appelle la méthode save  de ce même service. Dans la classe rest, il faudra donc appeler la méthode addProductToBasket du service.
+>    </details>
 
-#### 3.2.5. Tests JUnit indépendants via utilisation d'annotation magique de Spring
+Commencez par développer les tests nécessaires
 
-#### 3.2.6. Tests JUnit indépendants via utilisation de H2
+>    <details>
+>    <summary>Pistes</summary>
+>     A rédiger : expliquer les classes et méthodes à créer
+>    </details>
+
+Exécutez plusieurs fois votre test et observez le fonctionnement.
+
+> Votre test répond-il aux critères du RIP ?
+
+#### 3.2.2. Isolation des tests par du code
+
+> Comment procéder ?
+> Soit implémenter une interface (Repository
+> public ProductInBasketService(ProductInBasketRepository productInBasketRepository, BasketService basketService, ProductInBasketMapper productInBasketMapper) {
+
+    )
+
+> ProductInBasketRepository est une interface qu'on peut implémenter soit-même (mock manuel)
+> BasketService est une classe qu'on peut mocker de 2 manières différentes
+>
+> - par magie avec Spring @Mock
+> - avec Mockito
+>   Le mapper sert à convertir un ProductInBasketDTO (POJO exposé par l'API REST) vers un ProductInBasket (classe model utilisé par la persistence), ce n'est pas utile de le mocker. Il n'a pas d'influence négative sur les tests. Par contre, il est testé par cette méthode.
+
+#### 3.2.3. Test de service avec base de données en mémoire
+
+Dans cet exercice-là, il faudra passer tout le module de test sur une base en mémoire.
+Le test se fait alors différemment. On appelle la méthode sans mocker le repository. On vérifie après test que la base de donnée ne contient qu'un seul enregistrement et non pas deux.
+
+Avantages / Inconvénients de cette méthode:
+
+- Avantages: plus simple à coder
+- Inconvénient: on simule une base PostgreSQL avec H2, est-ce que le comportement sera exactement le même ?
+- Inconvénient: besoin de données de référence et d'une base H2 initialisée avec la structure des tables (chargées automatiquement avec liquibase)
 
 ### 3.3. Behavior Driven Development
 
 Implémenter la prise en compte des codes de réduction en mode Behavior Driven Development
+
+- Rédiger un document .feature en respectant given when then
+- Lancer les tests unitaires sur CucumberIT.java
+- Créer une nouvelle classe de test dans src/test/java/.../Cucumber/StepDefs
+- Copier coller l'étape à implémenter dans cette nouvelle classe
+- L'implémenter
 
 ### 3.4. Tests d'intégration d'IHM avec RobotFramework et Selenium
 
