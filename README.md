@@ -77,6 +77,8 @@ L'application a été construite avec [Jhipster](https://www.jhipster.tech/), un
 
 ### 2.1. Compilation et lancement de l'application en mode développement
 
+- Telecharger le client RDP afin de vous connecter à la VM:
+    https://www.microsoft.com/fr-fr/p/bureau-a-distance-microsoft/9wzdncrfj3ps?rtc=1
 - Se connecter sur la VM attribuée par le formateur
 - Lancer IntellijIDEA.
 - Configurer la source de données en saisissant le mode de passe de l'utilisateur adminfic à la section YML `spring.datasource.password` dans les fichiers :
@@ -146,7 +148,7 @@ Nous vous proposons désormais d'analyser le code correspondant à cette anomali
 >
 >    <details>
 >    <summary>Solution</summary>
->    La méthode web.rest.ProductInBasketResource.createProductInBasket  appelle la méthode service.ProductInBasketService.save qui appelle repository.productInBasketRepository.save
+>    La méthode web.rest.ProductInBasketResource.createProductInBasket appelle la méthode service.ProductInBasketService.save qui appelle repository.productInBasketRepository.save
 >    </details>
 
 Après analyse, pensez-vous que l'organisation du code actuelle vous permet-elle d'implémenter ce nouveau contrôle de façon adéquate.
