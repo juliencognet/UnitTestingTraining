@@ -4,7 +4,7 @@
 
 ### 1.1. Contexte
 
-L'application qui va être utilisée pour se former à la réalisation de tests automatisés est une implémentation très simplifiée d'un site web marchand, une marketplace électronique.
+L'application qui va être utilisée pour se former à la réalisation de tests automatisés, est une implémentation très simplifiée d'un site web marchand, une marketplace électronique.
 Vous allez vous focaliser sur la fonctionnalité d'ajout / retrait de produits dans un panier d'achat avec calcul du prix total du panier.
 
 ### 1.2. Processus
@@ -48,9 +48,6 @@ Dans le panier de produit, il est possible :
 - de retourner au magasin avec le bouton "Back to store"
 - de procéder au paiement (non implémenté) avec le bouton "Proceed to payment"
 
-### 1.3. Entités mises en oeuvre
-
-Ce projet met en oeuvre 5 entités métier:
 
 ### 1.3. Entités mises en oeuvre
 
@@ -80,6 +77,8 @@ L'application a été construite avec [Jhipster](https://www.jhipster.tech/), un
 
 ### 2.1. Compilation et lancement de l'application en mode développement
 
+- Telecharger le client RDP afin de vous connecter à la VM:
+    https://www.microsoft.com/fr-fr/p/bureau-a-distance-microsoft/9wzdncrfj3ps?rtc=1
 - Se connecter sur la VM attribuée par le formateur
 - Lancer IntellijIDEA.
 - Configurer la source de données en saisissant le mode de passe de l'utilisateur adminfic à la section YML `spring.datasource.password` dans les fichiers :
@@ -149,7 +148,7 @@ Nous vous proposons désormais d'analyser le code correspondant à cette anomali
 >
 >    <details>
 >    <summary>Solution</summary>
->    La méthode web.rest.ProductInBasketResource.createProductInBasket  appelle la méthode service.ProductInBasketService.save qui appelle repository.productInBasketRepository.save
+>    La méthode web.rest.ProductInBasketResource.createProductInBasket appelle la méthode service.ProductInBasketService.save qui appelle repository.productInBasketRepository.save
 >    </details>
 
 Après analyse, pensez-vous que l'organisation du code actuelle vous permet-elle d'implémenter ce nouveau contrôle de façon adéquate.
@@ -158,14 +157,17 @@ Après analyse, pensez-vous que l'organisation du code actuelle vous permet-elle
 >
 >    <details>
 >    <summary>Solution</summary>
->     Implémenter une nouvelle méthode addProductToBasket dans la classe de service (ProductInBasketService). Cette méthode procède au contrôles fonctionnels (dont le contrôle de doublon) et appelle la méthode save  de ce même service. Dans la classe rest, il faudra donc appeler la méthode addProductToBasket du service.
+>     Implémenter une nouvelle méthode addProductToBasket dans la classe de service (ProductInBasketService). Cette méthode procède au contrôles fonctionnels (dont le contrôle de doublon) et appelle la méthode save de ce même service. Dans la classe rest, il faudra donc appeler la méthode addProductToBasket du service.
 >    </details>
 
 Commencez par développer les tests nécessaires
 
 >    <details>
 >    <summary>Pistes</summary>
->     A rédiger : expliquer les classes et méthodes à créer
+>     Creer une nouvelle classe que vous nommerez, idéalement, ProductInBasketServiceIT.java, dans le repertoire src/test/java et dans le package com.cgi.fictestautomatises.productinbasket.service .
+>     Implementer une méthode init() annotée avec @BeforeEach qui permettra d'initialiser les données nécessaires pour chaque tests que vous allez developper.
+>     N'hesitez pas à vous inspirer du fichier UserServiceIT.
+>     Créer et implementer la fonction de test, addProductInBasketTest.     
 >    </details>
 
 Exécutez plusieurs fois votre test et observez le fonctionnement.
