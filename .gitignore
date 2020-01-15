@@ -145,3 +145,9 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+######################
+# RobotFramework
+######################
+src/test/robotframework/executionResults/*.html
+src/test/robotframework/executionResults/*.xml
