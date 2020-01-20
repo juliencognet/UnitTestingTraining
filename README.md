@@ -48,7 +48,6 @@ Dans le panier de produit, il est possible :
 - de retourner au magasin avec le bouton "Back to store"
 - de procéder au paiement (non implémenté) avec le bouton "Proceed to payment"
 
-
 ### 1.3. Entités mises en oeuvre
 
 Ce projet met en oeuvre 5 entités métier:
@@ -78,7 +77,7 @@ L'application a été construite avec [Jhipster](https://www.jhipster.tech/), un
 ### 2.1. Compilation et lancement de l'application en mode développement
 
 - Telecharger le client RDP afin de vous connecter à la VM:
-    https://www.microsoft.com/fr-fr/p/bureau-a-distance-microsoft/9wzdncrfj3ps?rtc=1
+  https://www.microsoft.com/fr-fr/p/bureau-a-distance-microsoft/9wzdncrfj3ps?rtc=1
 - Se connecter sur la VM attribuée par le formateur
 - Lancer IntellijIDEA.
 - Configurer la source de données en saisissant le mode de passe de l'utilisateur adminfic à la section YML `spring.datasource.password` dans les fichiers :
@@ -164,7 +163,7 @@ Commencez par développer les tests nécessaires
 
 >    <details>
 >    <summary>Pistes</summary>
->     Creer une nouvelle classe que vous nommerez, idéalement, ProductInBasketServiceIT.java, dans le repertoire src/test/java et dans le package com.cgi.fictestautomatises.productinbasket.service .
+>     Creer une nouvelle classe que vous nommerez, idéalement, ProductInBasketServiceIT.java, dans le repertoire src/test/java et dans le package com.cgi.fictestautomatises.productbasket.service .
 >     Implementer une méthode init() annotée avec @BeforeEach qui permettra d'initialiser les données nécessaires pour chaque tests que vous allez developper.
 >     N'hesitez pas à vous inspirer du fichier UserServiceIT.
 >     Créer et implementer la fonction de test, addProductInBasketTest.     
