@@ -62,6 +62,7 @@ public class ProductInBasketServiceIT {
         productDTO.setUnitPrice(DEFAULT_PRODUCT_PRICE);
         productDTO.setProductName(DEFAULT_PRODUCT_NAME);
 
+        // A newly created basket
         BasketDTO basketDTO = new BasketDTO();
         BasketDTO newBasketDTO = basketService.save(basketDTO);
 
