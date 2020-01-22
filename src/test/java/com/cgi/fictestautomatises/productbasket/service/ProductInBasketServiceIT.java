@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -85,15 +86,21 @@ public class ProductInBasketServiceIT {
          */
 
         // Add a first time the product
-        ProductInBasketDTO productDTOAfterFirstAddition = productInBasketService.add(productInBasketDTO);
+        ProductInBasketDTO productDTOAfterFirstAddition = productInBasketService.save(productInBasketDTO);
 
         // Add a second time the product
-        ProductInBasketDTO productDTOAfterSecondAddition = productInBasketService.add(productDTOAfterFirstAddition);
+        ProductInBasketDTO productDTOAfterSecondAddition = productInBasketService.save(productInBasketDTO);
+
+        List<ProductInBasketDTO> productsInBasketDTO = productInBasketService.findAll();
 
         /**
          *  ------  THEN  --------------
          */
-        assertThat(productDTOAfterSecondAddition.getQuantity()).isEqualTo(2);
+        //Test that only one product is declared in the basket
+        assertThat(productsInBasketDTO.size()).isEqualTo(1);
+
+        //Test that the quantity of the product is equal to 2
+        assertThat(productsInBasketDTO.get(0).getQuantity()).isEqualTo(2);
 
 
     }
