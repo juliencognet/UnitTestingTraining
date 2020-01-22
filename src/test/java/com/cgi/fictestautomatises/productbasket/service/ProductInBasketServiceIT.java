@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -37,6 +39,9 @@ public class ProductInBasketServiceIT {
     @Autowired
     private BasketService basketService;
 
+    @Autowired
+    private ProductService productService;
+
 
     private BasketDTO basketDTO;
 
@@ -44,8 +49,11 @@ public class ProductInBasketServiceIT {
     @BeforeEach
     public void init() {
 
-        this.basketDTO = new BasketDTO();
-        this.basketDTO.setId(DEFAULT_BASKET_ID);
+        basketDTO = new BasketDTO();
+        basketDTO.setId(DEFAULT_BASKET_ID);
+        basketDTO.setCreationDate(LocalDate.now());
+        basketDTO.setTotalPrice(0.F);
+        this.basketDTO = basketService.save(basketDTO);
     }
 
 
@@ -61,15 +69,12 @@ public class ProductInBasketServiceIT {
         productDTO.setId(DEFAULT_PRODUCT_ID);
         productDTO.setUnitPrice(DEFAULT_PRODUCT_PRICE);
         productDTO.setProductName(DEFAULT_PRODUCT_NAME);
-
-        // A newly created basket
-        BasketDTO basketDTO = new BasketDTO();
-        BasketDTO newBasketDTO = basketService.save(basketDTO);
+        productDTO = productService.save(productDTO);
 
         // A productInBasket
         ProductInBasketDTO productInBasketDTO = new ProductInBasketDTO();
         productInBasketDTO.setProduct(productDTO);
-        productInBasketDTO.setBasketId(newBasketDTO.getId());
+        productInBasketDTO.setBasketId(this.basketDTO.getId());
         productInBasketDTO.setId(DEFAULT_PRODUCT_IN_BASKET_ID);
         productInBasketDTO.setQuantity(1);
         productInBasketDTO.setProductId(productDTO.getId());
@@ -83,7 +88,7 @@ public class ProductInBasketServiceIT {
         ProductInBasketDTO productDTOAfterFirstAddition = productInBasketService.add(productInBasketDTO);
 
         // Add a second time the product
-        ProductInBasketDTO productDTOAfterSecondAddition = productInBasketService.add(productInBasketDTO);
+        ProductInBasketDTO productDTOAfterSecondAddition = productInBasketService.add(productDTOAfterFirstAddition);
 
         /**
          *  ------  THEN  --------------
