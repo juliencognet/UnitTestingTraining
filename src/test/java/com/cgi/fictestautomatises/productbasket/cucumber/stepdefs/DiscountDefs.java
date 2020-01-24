@@ -74,14 +74,20 @@ public class DiscountDefs {
     }
 
 
-    @Given("a BasketDTO that contains the DiscountCode {string} and a Product with id {int} with a price of {int}")
-    public void a_BasketDTO_that_contains_the_DiscountCode_and_a_Product_with_id_with_a_price_of(String string, Integer int1, Integer int2) {
+    @Given("a discount code name {string} which provides a discount of {double} per cent")
+    public void a_discount_code_name_which_provides_a_discount_of_per_cent(String string, Double double1) {
         // Write code here that turns the phrase above into concrete actions
         throw new cucumber.api.PendingException();
     }
 
-    @When("the user save the basket")
-    public void the_user_save_the_basket() {
+    @Given("an empty product basket")
+    public void an_empty_product_basket() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new cucumber.api.PendingException();
+    }
+
+    @When("the user adds a product with a unit price of {int} dollars")
+    public void the_user_adds_a_product_with_a_unit_price_of_dollars(Integer int1) {
         // Write code here that turns the phrase above into concrete actions
         throw new cucumber.api.PendingException();
     }

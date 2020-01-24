@@ -1,12 +1,13 @@
 Feature: Add and apply discount to the basket
 
-Scenario: Add discount to the basket
-    Given a valid Basket and a discount code  "TenPourcent"
-     When I call save the discount code into the basket
-     Then the discount code should be saved into the Basket
+    Scenario Outline: Check that a discount is applied to the basket
+        Given a discount code name "<DiscountCodeName>" which provides a discount of <DiscountPercent> per cent
+        And an empty product basket
+        When the user adds a product with a unit price of <unitPrice> dollars
+        Then the total price of the basket must be <totalPrice>
 
-Scenario: Check that a discount is applied to the basket
-    Given a BasketDTO that contains the DiscountCode "TenPourcent" and a Product with id 1 with a price of 50
-    When the user save the basket
-    Then the total price of the basket must be 45
-
+        Examples:
+        | DiscountCodeName | DiscountPercent | unitPrice | totalPrice |
+        | 10POURCENT       | 0.1             | 100       | 90         |
+        | 10POURCENT       | 0.1             | 200       | 180        |
+        | 20POURCENT       | 0.2             | 100       | 80         |
