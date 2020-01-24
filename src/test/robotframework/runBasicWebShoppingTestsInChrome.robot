@@ -6,7 +6,6 @@ Resource          basicWebShoppingTestKeywords.robot
 *** Variables ***
 ${LOGIN URL}      http://localhost:9000
 ${BROWSER}        Chrome
-#${BROWSER}        Chrome ## Use this browser if you need to "see" the test in action
 
 *** Test Cases ***
 Check basic features of online web shop
