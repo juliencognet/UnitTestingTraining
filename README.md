@@ -215,7 +215,48 @@ Implémenter la prise en compte des codes de réduction en mode Behavior Driven 
 
 ### 3.4. Tests d'intégration d'IHM avec RobotFramework et Selenium
 
-A définir
+#### 3.4.1. Exécution des tests RobotFramework
+
+RobotFramework est un framework de tests automatiques en Python pour concevoir et exécuter des tests de validation.
+
+Il est généralement utilisé pour réaliser des **tests d'intégration**.
+
+Combiné avec la librairie Selenium, il permet d'exécuter des tests d'IHM. C'est ce que nous vous proposons de réaliser désormais.
+
+Un exemple de test d'IHM a été fourni dans le projet. Nous vous proposons de l'exécuter pour démarrer. Voici les étapes à suivre:
+
+- Démarrer l'application en ouvrant 2 terminaux
+- Dans l'un, lancer la commande `mvnw` (démarrage du back-end)
+- Dans l'autre, lancer la commande `npm start` (démarrage du front-end)
+- Ouvrir un troisième terminal
+- Aller dans le dossier robotframework avec la commande `cd src/test/robotframework`
+- Exécuter un test avec `robot --outputdir executionResults/ runBasicWebShoppingTestsInChrome.robot`
+- Une fenête Chrome s'ouvre alors et vous verrez l'exécution du test en direct.
+- Une fois les tests terminés, vous pouvez regarder les résultats détaillés de l'exécution en ouvrant le fichier [**executionResults/report.html**](./src/test/robotframework/execution/report.html)
+
+Vous pouvez aussi lancer le test automatisé en mode "silencieux" en lançant la commande:
+`robot --outputdir executionResults/ runBasicWebShoppingTestsInHeadlessChrome.robot`. C'est ce qu'exécute une plateforme d'intégration continue qui ne dépend ainsi pas d'un navigateur installé sur le serveur d'intégration.
+
+#### 3.4.2. A vous de jouer
+
+Sur la base de l'exemple fourni, votre mission va consister à tester le scénario suivant:
+
+- Se connecter à l'application
+- Choisir un utilisateur
+- Ajouter un produit dans un panier vide
+- Vérifier le montant du panier
+- Ajouter un coupon de réduction
+- Vérifier que le montant du panier a été actualisé et que le prix est réduit en conséquence
+
+Pour ceux qui ont encore du temps :
+
+- Ajouter ce même produit dans le même panier
+- Vérifier que le panier ne comporte qu'une seule ligne avec une quantité de 2
+- Vérifier le montant associé
+
+Dans tous les cas :
+
+- Nettoyer les données pour que le test puisse être répétable (s'en assurer en lançant votre test plusieurs fois)
 
 ---
 
