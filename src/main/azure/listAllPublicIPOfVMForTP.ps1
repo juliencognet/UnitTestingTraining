@@ -1,0 +1,1 @@
+Get-AzureRmPublicIpAddress -ResourceGroupName 'FIC_Testing_TP' -ErrorAction Stop | select Name, IpAddress
