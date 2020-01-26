@@ -258,6 +258,13 @@ Dans tous les cas :
 
 - Nettoyer les données pour que le test puisse être répétable (s'en assurer en lançant votre test plusieurs fois)
 
+**Quelques conseils avant de démarrer:**
+- Pour écrire un test RobotFramework, il faut distinguer :
+  - les **mots-clés** qui s'écrivent en début de ligne et peuvent comporter des espaces
+  - les **paramètres** qui doivent être **espacés d'au moins 2 espaces**
+- Aidez-vous de la description des mots clés de la [bibliothèque Selenium](https://robotframework.org/SeleniumLibrary/SeleniumLibrary.html)
+- Pour retrouver les identifiants des éléments que vous souhaitez manipuler sur la page web, aidez-vous de la fonction **Inspecter** disponible via un clic droit sur la page dans Chrome.
+
 ---
 
 ## Jhipster documentation (development guide)
