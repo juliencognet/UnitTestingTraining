@@ -87,7 +87,7 @@ L'application a été construite avec [Jhipster](https://www.jhipster.tech/), un
 - Lancer un premier terminal et taper la commande `npm start`
 - Une fois que l'application front-end Angular est construite, la page web Market place simulation doit s'ouvrir dans le navigateur (à l'adresse [http://localhost:9000](http://localhost:9000)
 - Dans l'onglet Terminal, cliquer sur + pour ouvrir un nouveau terminal.
-- Dans ce nouveau terminal, lancer le front-end en tapant la commande `mnww`
+- Dans ce nouveau terminal, lancer le front-end en tapant la commande `mvnw`
 - Vous pouvez ensuite vous connecter sur l'application en cliquant sur "Account" en haut à droite, puis sur "Sign in"
 - Saisir "admin" comme login et "admin" comme password
 - Vous arrivez ensuite sur la première page de l'application _Customer login simulation_
