@@ -80,6 +80,7 @@ L'application a été construite avec [Jhipster](https://www.jhipster.tech/), un
   https://www.microsoft.com/fr-fr/p/bureau-a-distance-microsoft/9wzdncrfj3ps?rtc=1
 - Se connecter sur la VM attribuée par le formateur
 - Lancer IntellijIDEA.
+- Commencer par mettre à jour le projet en lançant la commande suivante dans un terminal : `git pull`
 - Configurer la source de données en saisissant le mode de passe de l'utilisateur adminfic à la section YML `spring.datasource.password` dans les fichiers :
   - `src/main/resources/config/application-dev.yml`
   - `src/test/resources/config/application.yml`
