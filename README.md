@@ -206,13 +206,17 @@ Avantages / Inconvénients de cette méthode:
 
 ### 3.3. Behavior Driven Development
 
-Implémenter la prise en compte des codes de réduction en mode Behavior Driven Development
+Dans cet exercice, en appliquant le BDD associé au TDD, vous allez développer une nouvelle fonctionnalité gràce à la user story suivante:  
+_En tant que client, quand je renseigne un bon de reduction qui donne droit a une reduction de x%, je veux que le montant total de ma commande soit defalquer du pourcentage associé au bon de reduction._
 
-- Rédiger un document .feature en respectant given when then
+Afin de mettre en place un test BDD, nous allons utiliser Cucumber et le langage naturel gherkin
+
+- Créer le document discount.feature que vous placerez dans le dossier: /src/main/test/features/user/ .
+- Editer le fichier précédent en respectant la syntaxe gherkin: given when then
 - Lancer les tests unitaires sur CucumberIT.java
-- Créer une nouvelle classe de test dans src/test/java/.../Cucumber/StepDefs
+- Créer une nouvelle classe de test dans src/test/java/.../Cucumber/StepDefs que vous nommerez DsicountDefs.java (NB: Insperez vous du fichier UserStepDefs pour la syntaxe)
 - Copier coller l'étape à implémenter dans cette nouvelle classe
-- L'implémenter
+- Implémenter les methodes.
 
 ### 3.4. Tests d'intégration d'IHM avec RobotFramework et Selenium
 
@@ -260,6 +264,7 @@ Dans tous les cas :
 - Nettoyer les données pour que le test puisse être répétable (s'en assurer en lançant votre test plusieurs fois)
 
 **Quelques conseils avant de démarrer:**
+
 - Pour écrire un test RobotFramework, il faut distinguer :
   - les **mots-clés** qui s'écrivent en début de ligne et peuvent comporter des espaces
   - les **paramètres** qui doivent être **espacés d'au moins 2 espaces**
