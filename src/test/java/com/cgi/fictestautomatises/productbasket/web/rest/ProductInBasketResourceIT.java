@@ -93,10 +93,10 @@ public class ProductInBasketResourceIT {
      */
     public static ProductInBasket createEntity(EntityManager em) {
         Product product = new Product();
-        product.setId(123L);
+        //product.setId(123L);
 
         ProductInBasket productInBasket = new ProductInBasket();
-        productInBasket.setProduct(product);
+
         productInBasket.setQuantity(DEFAULT_QUANTITY);
 
         return productInBasket;
@@ -109,10 +109,10 @@ public class ProductInBasketResourceIT {
      */
     public static ProductInBasket createUpdatedEntity(EntityManager em) {
         Product product = new Product();
-        product.setId(123L);
+        //product.setId(123L);
 
         ProductInBasket productInBasket = new ProductInBasket();
-        productInBasket.setProduct(product);
+        //productInBasket.setProduct(product);
         productInBasket.setQuantity(DEFAULT_QUANTITY);
 
         return productInBasket;

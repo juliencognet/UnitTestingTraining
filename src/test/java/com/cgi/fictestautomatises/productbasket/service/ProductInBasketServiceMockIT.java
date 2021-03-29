@@ -110,9 +110,10 @@ public class ProductInBasketServiceMockIT {
          */
 
         // Add a first time the product
-        ProductInBasketDTO productDTOAfterFirstAddition = productInBasketService.add(productInBasketDTO);
+        ProductInBasketDTO productInBasketFirstAddition = productInBasketService.add(productInBasketDTO);
         // Add a second time the product
-        ProductInBasketDTO productDTOAfterSecondAddition = productInBasketService.add(productInBasketDTO);
+
+        ProductInBasketDTO productDTOAfterSecondAddition = productInBasketService.add(productInBasketFirstAddition);
 
         List<ProductInBasketDTO> productsInBasketDTO = productInBasketService.findAll();
 

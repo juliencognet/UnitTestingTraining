@@ -73,7 +73,7 @@ public class ProductInBasketResource {
         if (productInBasketDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        ProductInBasketDTO result = productInBasketService.add(productInBasketDTO);
+        ProductInBasketDTO result = productInBasketService.save(productInBasketDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, productInBasketDTO.getId().toString()))
             .body(result);

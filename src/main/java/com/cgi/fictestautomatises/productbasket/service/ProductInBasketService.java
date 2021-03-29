@@ -42,7 +42,7 @@ public class ProductInBasketService {
      * @param productInBasketDTO the entity to save.
      * @return the persisted entity.
      */
-    private ProductInBasketDTO save(ProductInBasketDTO productInBasketDTO) {
+     public ProductInBasketDTO save(ProductInBasketDTO productInBasketDTO) {
         log.debug("Request to save ProductInBasket : {}", productInBasketDTO);
         ProductInBasket productInBasket = productInBasketMapper.toEntity(productInBasketDTO);
         productInBasket = productInBasketRepository.save(productInBasket);
@@ -65,7 +65,7 @@ public class ProductInBasketService {
         ProductInBasketDTO finalProductInBasketDTO = productInBasketDTO;
 
         Optional<ProductInBasket> potentialExistingProductInBasket  = productInBasketRepository.findAllByBasketId(productInBasketDTO.getBasketId()).stream().filter(
-            productInBasketDTO1 -> finalProductInBasketDTO.getProductId().equals(productInBasketDTO1.getProduct().getId())).findFirst();
+            productInBasketDTO1 -> finalProductInBasketDTO.getProduct().getId().equals(productInBasketDTO1.getProduct().getId())).findFirst();
         ;
 
         if(potentialExistingProductInBasket.isPresent()){
@@ -73,9 +73,7 @@ public class ProductInBasketService {
             existingProductInBasket.setQuantity(existingProductInBasket.getQuantity()+productInBasketDTO.getQuantity());
             productInBasketDTO = productInBasketMapper.toDto(existingProductInBasket); }
 
-        this.save(productInBasketDTO);
-
-        return productInBasketDTO;
+        return this.save(productInBasketDTO);
     }
 
     /**

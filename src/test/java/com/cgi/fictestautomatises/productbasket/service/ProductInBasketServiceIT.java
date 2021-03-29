@@ -1,6 +1,8 @@
 package com.cgi.fictestautomatises.productbasket.service;
 
 import com.cgi.fictestautomatises.productbasket.FicTestsAutomatisesApp;
+import com.cgi.fictestautomatises.productbasket.domain.Product;
+import com.cgi.fictestautomatises.productbasket.domain.ProductInBasket;
 import com.cgi.fictestautomatises.productbasket.service.dto.BasketDTO;
 import com.cgi.fictestautomatises.productbasket.service.dto.ProductDTO;
 import com.cgi.fictestautomatises.productbasket.service.dto.ProductInBasketDTO;
@@ -86,10 +88,10 @@ public class ProductInBasketServiceIT {
          */
 
         // Add a first time the product
-        ProductInBasketDTO productDTOAfterFirstAddition = productInBasketService.add(productInBasketDTO);
+        ProductInBasketDTO productInDTOAfterFirstAddition = productInBasketService.add(productInBasketDTO);
 
         // Add a second time the product
-        ProductInBasketDTO productDTOAfterSecondAddition = productInBasketService.add(productInBasketDTO);
+        ProductInBasketDTO productInDTOAfterSecondAddition = productInBasketService.add(productInBasketDTO);
 
         List<ProductInBasketDTO> productsInBasketDTO = productInBasketService.findAll();
 
