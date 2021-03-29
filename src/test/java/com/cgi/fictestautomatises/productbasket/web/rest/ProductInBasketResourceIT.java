@@ -2,6 +2,7 @@ package com.cgi.fictestautomatises.productbasket.web.rest;
 
 import com.cgi.fictestautomatises.productbasket.FicTestsAutomatisesApp;
 import com.cgi.fictestautomatises.productbasket.domain.Basket;
+import com.cgi.fictestautomatises.productbasket.domain.Product;
 import com.cgi.fictestautomatises.productbasket.domain.ProductInBasket;
 import com.cgi.fictestautomatises.productbasket.repository.BasketRepository;
 import com.cgi.fictestautomatises.productbasket.repository.ProductInBasketRepository;
@@ -91,8 +92,13 @@ public class ProductInBasketResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProductInBasket createEntity(EntityManager em) {
-        ProductInBasket productInBasket = new ProductInBasket()
-            .quantity(DEFAULT_QUANTITY);
+        Product product = new Product();
+        product.setId(123L);
+
+        ProductInBasket productInBasket = new ProductInBasket();
+        productInBasket.setProduct(product);
+        productInBasket.setQuantity(DEFAULT_QUANTITY);
+
         return productInBasket;
     }
     /**
@@ -102,8 +108,13 @@ public class ProductInBasketResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProductInBasket createUpdatedEntity(EntityManager em) {
-        ProductInBasket productInBasket = new ProductInBasket()
-            .quantity(UPDATED_QUANTITY);
+        Product product = new Product();
+        product.setId(123L);
+
+        ProductInBasket productInBasket = new ProductInBasket();
+        productInBasket.setProduct(product);
+        productInBasket.setQuantity(DEFAULT_QUANTITY);
+
         return productInBasket;
     }
 
@@ -184,7 +195,7 @@ public class ProductInBasketResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(productInBasket.getId().intValue())))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)));
     }
-    
+
     @Test
     @Transactional
     public void getProductInBasket() throws Exception {

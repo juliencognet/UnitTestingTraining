@@ -2,6 +2,7 @@ package com.cgi.fictestautomatises.productbasket.service;
 
 import com.cgi.fictestautomatises.productbasket.domain.ProductInBasket;
 import com.cgi.fictestautomatises.productbasket.repository.ProductInBasketRepository;
+import com.cgi.fictestautomatises.productbasket.service.dto.BasketDTO;
 import com.cgi.fictestautomatises.productbasket.service.dto.ProductInBasketDTO;
 import com.cgi.fictestautomatises.productbasket.service.mapper.ProductInBasketMapper;
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ public class ProductInBasketService {
      * @param productInBasketDTO the entity to save.
      * @return the persisted entity.
      */
-    public ProductInBasketDTO save(ProductInBasketDTO productInBasketDTO) {
+    private ProductInBasketDTO save(ProductInBasketDTO productInBasketDTO) {
         log.debug("Request to save ProductInBasket : {}", productInBasketDTO);
         ProductInBasket productInBasket = productInBasketMapper.toEntity(productInBasketDTO);
         productInBasket = productInBasketRepository.save(productInBasket);
@@ -60,11 +61,22 @@ public class ProductInBasketService {
      * @return the persisted entity.
      */
     public ProductInBasketDTO add(ProductInBasketDTO productInBasketDTO) {
-        log.debug("Request to add product to basket : {}", productInBasketDTO);
 
-        return save(productInBasketDTO);
+        ProductInBasketDTO finalProductInBasketDTO = productInBasketDTO;
+
+        Optional<ProductInBasket> potentialExistingProductInBasket  = productInBasketRepository.findAllByBasketId(productInBasketDTO.getBasketId()).stream().filter(
+            productInBasketDTO1 -> finalProductInBasketDTO.getProductId().equals(productInBasketDTO1.getProduct().getId())).findFirst();
+        ;
+
+        if(potentialExistingProductInBasket.isPresent()){
+            ProductInBasket existingProductInBasket = potentialExistingProductInBasket.get();
+            existingProductInBasket.setQuantity(existingProductInBasket.getQuantity()+productInBasketDTO.getQuantity());
+            productInBasketDTO = productInBasketMapper.toDto(existingProductInBasket); }
+
+        this.save(productInBasketDTO);
+
+        return productInBasketDTO;
     }
-
 
     /**
      * Get all the productInBaskets.
