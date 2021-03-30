@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -85,14 +86,14 @@ public class BasketService {
     public Page<BasketDTO> findAllWithEagerRelationships(Pageable pageable) {
         return basketRepository.findAllWithEagerRelationships(pageable).map(basketMapper::toDto);
     }
-    
+
 
 
     /**
     *  Get all the baskets where Customer is {@code null}.
      *  @return the list of entities.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<BasketDTO> findAllWhereCustomerIsNull() {
         log.debug("Request to get all baskets where Customer is null");
         return StreamSupport
@@ -140,13 +141,22 @@ public class BasketService {
         // Get all products of basket
         List<ProductInBasket> productsInBasket = productInBasketRepository.findAllByBasketId(id);
 
+        // Get list of discount codes and keep the best one
+        Optional<DiscountCode> bestDiscountCode = currentBasket.getDiscountCodes().stream().max(Comparator.comparing(DiscountCode::getDiscount));
+        float discount = 1;
+        if (bestDiscountCode.isPresent()){
+            discount = 1-bestDiscountCode.get().getDiscount();
+        }
+
         // Compute total price as sum of all product lines (unit price * quantity) added to the basket
+        float finalDiscount = discount;
         Float totalPrice = productsInBasket.stream()
             .map(p ->
                 this.productService.findOne(p.getProduct().getId()).get().getUnitPrice()
                     // must call product service to get product data because when product is added to basket as
                     // ProductInBasket, object is nearly empty (excepted ID)
                     * p.getQuantity()
+                    * finalDiscount
             )
             .reduce((price1, price2) -> price1+price2) // total is sum of all lines
             .orElse(0F); // if no product in basket, basket price is 0
