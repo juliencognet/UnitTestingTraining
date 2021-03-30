@@ -65,7 +65,7 @@ public class ProductInBasketService {
         ProductInBasketDTO finalProductInBasketDTO = productInBasketDTO;
 
         Optional<ProductInBasket> potentialExistingProductInBasket  = productInBasketRepository.findAllByBasketId(productInBasketDTO.getBasketId()).stream().filter(
-            productInBasketDTO1 -> finalProductInBasketDTO.getProduct().getId().equals(productInBasketDTO1.getProduct().getId())).findFirst();
+            productInBasketDTO1 -> finalProductInBasketDTO.getProductId().equals(productInBasketDTO1.getProduct().getId())).findFirst();
         ;
 
         if(potentialExistingProductInBasket.isPresent()){
