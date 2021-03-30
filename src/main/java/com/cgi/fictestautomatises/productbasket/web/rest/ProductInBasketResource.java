@@ -52,7 +52,7 @@ public class ProductInBasketResource {
         if (productInBasketDTO.getId() != null) {
             throw new BadRequestAlertException("A new productInBasket cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ProductInBasketDTO result = productInBasketService.save(productInBasketDTO);
+        ProductInBasketDTO result = productInBasketService.add(productInBasketDTO);
         return ResponseEntity.created(new URI("/api/product-in-baskets/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -73,7 +73,7 @@ public class ProductInBasketResource {
         if (productInBasketDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        ProductInBasketDTO result = productInBasketService.save(productInBasketDTO);
+        ProductInBasketDTO result = productInBasketService.add(productInBasketDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, productInBasketDTO.getId().toString()))
             .body(result);

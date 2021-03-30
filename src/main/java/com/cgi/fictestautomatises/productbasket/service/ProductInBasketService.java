@@ -55,6 +55,18 @@ public class ProductInBasketService {
     }
 
     /**
+     * Add a product to the basket
+     * @param productInBasketDTO the entity to save.
+     * @return the persisted entity.
+     */
+    public ProductInBasketDTO add(ProductInBasketDTO productInBasketDTO) {
+        log.debug("Request to add product to basket : {}", productInBasketDTO);
+
+        return save(productInBasketDTO);
+    }
+
+
+    /**
      * Get all the productInBaskets.
      *
      * @return the list of entities.
