@@ -234,6 +234,9 @@ Un exemple de test d'IHM a été fourni dans le projet. Nous vous proposons de l
 - Dans l'un, lancer la commande `mvnw` (démarrage du back-end)
 - Dans l'autre, lancer la commande `npm start` (démarrage du front-end)
 - Ouvrir un troisième terminal
+- Tapez la commande `pip install webdrivermanager` (pour mettre à jour les drivers Chrome)
+- Une fois cette commande faite, tapez une deuxième commande `webdrivermanager firefox chrome --linkpath C:\dev\software\browser-drivers`
+- La configuration RobotFramework est terminée, vous pouvez maintenant les lancer.
 - Aller dans le dossier robotframework avec la commande `cd src/test/robotframework`
 - Exécuter un test avec `robot --outputdir executionResults/ runBasicWebShoppingTestsInChrome.robot`
 - Une fenête Chrome s'ouvre alors et vous verrez l'exécution du test en direct.
