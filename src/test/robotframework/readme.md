@@ -19,6 +19,6 @@
 - At first start the application to test
 - Open a terminal
 - Go into **src/test/robotframework** folder with `cd src/test/robotframework`
-- Execute Robot tests with command `robot --outputdir executionResults/ runBasicWebShoppingTestsInChrome.robot`
+- Execute Robot tests with command `robot --outputdir executionResults/ runBasicWebShoppingTests.robot`
 - A Chrome window will open and you will see the execution of your tests
 - When tests are done, you may look at detailed execution results in in file **executionResults/report.html**

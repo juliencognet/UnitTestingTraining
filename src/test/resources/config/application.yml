@@ -19,9 +19,9 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:h2:mem:FIC_Tests_Automatises;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    name: sa
-    username: sa
-    password: sa
+    name:
+    username:
+    password:
     hikari:
       auto-commit: false
   jpa:

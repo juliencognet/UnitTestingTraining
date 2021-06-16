@@ -5,7 +5,7 @@ Resource          basicWebShoppingTestKeywords.robot
 
 *** Variables ***
 ${LOGIN URL}      http://localhost:9000
-${BROWSER}        HeadlessChrome
+${BROWSER}        HeadlessFirefox
 
 *** Test Cases ***
 Check basic features of online web shop
